@@ -1,0 +1,9 @@
+c conversion slide example
+c http://www.sc-square.org/CSA/workshop2-slides/RP1-Slides.pdf
+p 5 6
+1 2 0
+-1 2 3 0
+4 5 0
+1 -2 3 0
+-1 -2 -3 0
+4 -5
