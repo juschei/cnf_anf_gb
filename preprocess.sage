@@ -1,8 +1,8 @@
 #from sage.rings.polynomial.pbori import *
 import networkx as nx
 from itertools import compress
-import matplotlib.pyplot as plt
-
+#import matplotlib.pyplot as plt
+import msgspec
 
 def variables(clauses):
     variables = set()
@@ -23,13 +23,6 @@ def print_conversion(clauses, functions):
         c = str(c)
         f = str(f)
         print(c.ljust(15, " "), " <-> ", f)
-
-
-def satsolve(clauses):
-    solver = SAT()
-    for c in clauses:
-        solver.add_clause(c)
-    return solver()
 
 
 def standard_conversion(ring, clauses):
@@ -183,7 +176,7 @@ if __name__ == "__main__":
     ex1 = "example1.cnf"
     ex2 = "larger_example.cnf"
     ex2 = "new2.cnf"
-    in_data = open('cnfs/' + ex2).read().splitlines()
+    in_data = open('cnfs/' + ex1).read().splitlines()
     clauses = [[int(n) for n in line.split() if n != '0'] for line in in_data if line[0] not in ('c', 'p')]
 
     nr_vars = count_variables(clauses)
@@ -211,33 +204,31 @@ if __name__ == "__main__":
 
     #print(reps_set)
     #print(T)
+    
+    print(reps_set)
 
-    S = []
-    for rep in reps_set:
+    # serialze cnfs and write them to files
+    # TODO pass nrwars as GPI space arg
+    # TODO pass nr representatives (len(reps_set)) as GPI space arg and also filter out one-element sets
+    data_path = "/home/juschei/Desktop/cnf_anf_gb/input/"
+    for i, rep in enumerate(reps_set):
+    	data = msgspec.msgpack.encode((nr_vars, rep))
+    	with open(data_path + str(i).zfill(3), "wb") as f:
+    		f.write(data)
+
+    #S = []
+    #for rep in reps_set:
         #print(rep)
-        ideal = B.ideal(standard_conversion(B, rep))
-        gb = ideal.groebner_basis()
-        S.append(gb)
+        #ideal = B.ideal(standard_conversion(B, rep))
+        #gb = ideal.groebner_basis()
+        #S.append(gb)
 
-    basis = B.ideal(S).interreduced_basis()
+    #basis = B.ideal(S).interreduced_basis()
     # this seems to convert it back to the polybori ideal
     # sage.rings.polynomial.pbori.pbori.BooleanPolynomialIdeal
     # otherwise, interreduced_basis() gives the sage type
     # sage.rings.polynomial.multi_polynomial_sequence.PolynomialSequence_gf2
-    basis = B.ideal(basis)
-    print(basis)
+    #basis = B.ideal(basis)
+    #print(basis)
 
-    # # convert back
-    # reps = []
-    # for rep in reps_set:
-    #     reps.append([list(c) for c in rep])
-
-    # for s in reps:
-    #     print(s)
-
-    # clauses_set = frozenset([frozenset(c) for c in clauses])
-
-    # covered = set()
-    # for rep in reps_set:
-    #     for c in rep:
-    #         covered.add(c)
+    
