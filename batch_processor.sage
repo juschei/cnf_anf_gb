@@ -27,14 +27,14 @@ def standard_conversion(ring, clauses):
 
 @profile
 def process(nr_vars, clauses, nr):
-	B = BooleanPolynomialRing(nr_vars+1, 'x')
-	ideal = B.ideal(standard_conversion(B, clauses))
-	gb = ideal.groebner_basis()
-	
-	data = dumps(gb)
-	with open(outpath + str(nr).zfill(3), "wb") as f:
-		f.write(data)
+    B = BooleanPolynomialRing(nr_vars+1, 'x')
+    ideal = B.ideal(standard_conversion(B, clauses))
+    gb = ideal.groebner_basis()
 
+    data = dumps(gb)
+    with open(outpath + str(nr).zfill(3), "wb") as f:
+        f.write(data)
+    del data
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
@@ -53,6 +53,8 @@ if __name__=="__main__":
             process(nr_vars, clauses, nr)
         gc.collect()
 	
+    print("Left the loop!")
     from guppy import hpy
     h = hpy()
+    print(h)
     print(h.heap())
