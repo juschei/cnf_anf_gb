@@ -1,12 +1,6 @@
-print("HI")
-import traceback
-print("HI")
-try:
-	import argparse
-	from sage.rings.polynomial.pbori import BooleanPolynomialRing
-	import msgspec
-except:
-	traceback.print_exc()
+from sage.rings.polynomial.pbori import BooleanPolynomialRing
+import msgspec
+
 
 inpath = "/home/juschei/Desktop/cnf_anf_gb/input/"
 outpath = "/home/juschei/Desktop/cnf_anf_gb/output/"
