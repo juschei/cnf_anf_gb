@@ -12,12 +12,12 @@ outpath = "/home/juschei/Desktop/cnf_anf_gb/output/"
 #B = None
 
 
-def standard_conversion(ring, clauses):
+def standard_conversion(boolean_ring, clauses):
     functions = []
-    variables = ring.gens()
+    variables = boolean_ring.gens()
 
     for c in clauses:
-        f = ring(1)
+        f = boolean_ring(1)
         for L in c:
             if L > 0:
                 f *= (variables[L] + 1)
@@ -30,13 +30,13 @@ def standard_conversion(ring, clauses):
 
 
 @profile
-def process(clauses, nr):
+def process(boolean_ring, clauses, nr):
 
     #B = BooleanPolynomialRing(nr_vars+1, 'x')
-    ideal = B.ideal(standard_conversion(B, clauses))
+    ideal = boolean_ring.ideal(standard_conversion(boolean_ring, clauses))
     gb = ideal.groebner_basis()
 
-    del B
+
     data = dumps(gb)
     with open(outpath + str(nr).zfill(3), "wb") as f:
         f.write(data)
@@ -47,6 +47,7 @@ if __name__=="__main__":
     parser.add_argument("--startidx", type=int, required=True)
     parser.add_argument("--total", type=int, required=False)
     parser.add_argument("--nrworkers", type=int, required=False)
+
     TOTAL = 999
     NR_WORKERS = 4
     args = parser.parse_args()
@@ -63,11 +64,7 @@ if __name__=="__main__":
         with open(inpath + str(nr).zfill(3), "rb") as f:
             raw = f.read()
             clauses = msgspec.msgpack.decode(raw)
-            process(clauses, nr)
+            process(B, clauses, nr)
         gc.collect()
 	
     print("Left the loop!")
-    from guppy import hpy
-    h = hpy()
-    print(h)
-    print(h.heap())
