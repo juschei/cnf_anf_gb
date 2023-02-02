@@ -38,9 +38,10 @@ if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--startidx", type=int, required=True)
     TOTAL = 47
+    NR_WORKERS = 4
     args = parser.parse_args()
     startidx = args.startidx
-    for nr in range(startidx, TOTAL, startidx):
+    for nr in range(startidx, TOTAL, NR_WORKERS):
         with open(inpath + str(nr).zfill(3), "rb") as f:
             raw = f.read()
             nr_vars, clauses = msgspec.msgpack.decode(raw)
