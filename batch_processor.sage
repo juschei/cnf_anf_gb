@@ -2,6 +2,7 @@ from sage.rings.polynomial.pbori import BooleanPolynomialRing
 import msgspec
 import argparse
 import gc
+from memory_profiler import profile
 
 inpath = "/home/juschei/Desktop/cnf_anf_gb/input/"
 outpath = "/home/juschei/Desktop/cnf_anf_gb/output/"
