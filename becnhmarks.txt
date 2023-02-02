@@ -1,0 +1,6 @@
+run 1/4 in onebatch
+1m13s
+
+run all of them restarting sage every time
+2m17
+
