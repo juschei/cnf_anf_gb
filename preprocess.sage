@@ -212,10 +212,13 @@ if __name__ == "__main__":
     # TODO pass nr representatives (len(reps_set)) as GPI space arg and also filter out one-element sets
     data_path = "/home/juschei/Desktop/cnf_anf_gb/input/"
     for i, rep in enumerate(reps_set):
-    	data = msgspec.msgpack.encode((nr_vars, rep))
-    	with open(data_path + str(i).zfill(3), "wb") as f:
-    		f.write(data)
+        data = msgspec.msgpack.encode(rep)
+        with open(data_path + str(i).zfill(3), "wb") as f:
+            f.write(data)
 
+    # write number of variables to nr_vars file
+    with open(data_path + "nr_vars", "w") as f:
+        f.write(str(nr_vars))
     #S = []
     #for rep in reps_set:
         #print(rep)

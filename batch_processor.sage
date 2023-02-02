@@ -30,14 +30,13 @@ def standard_conversion(ring, clauses):
 
 
 @profile
-def process(nr_vars, clauses, nr):
+def process(clauses, nr):
 
-    B = BooleanPolynomialRing(nr_vars+1, 'x')
+    #B = BooleanPolynomialRing(nr_vars+1, 'x')
     ideal = B.ideal(standard_conversion(B, clauses))
     gb = ideal.groebner_basis()
 
     del B
-    
     data = dumps(gb)
     with open(outpath + str(nr).zfill(3), "wb") as f:
         f.write(data)
@@ -54,14 +53,17 @@ if __name__=="__main__":
     startidx = args.startidx
 
 
-    #BooleanPolynomialRing(nr_vars+1, 'x')
+    # fetch number of variables from nr_varvs file
+    with open(inpath + "nr_vars", "r") as f:
+        nr_vars = int(f.read().strip())
+    B = BooleanPolynomialRing(nr_vars+1, 'x')
 
     for nr in range(startidx, TOTAL, NR_WORKERS):
         print("working with file", nr, "now")
         with open(inpath + str(nr).zfill(3), "rb") as f:
             raw = f.read()
-            nr_vars, clauses = msgspec.msgpack.decode(raw)
-            process(nr_vars, clauses, nr)
+            clauses = msgspec.msgpack.decode(raw)
+            process(clauses, nr)
         gc.collect()
 	
     print("Left the loop!")
