@@ -7,6 +7,23 @@ inpath = "/home/juschei/Desktop/cnf_anf_gb/input/"
 outpath = "/home/juschei/Desktop/cnf_anf_gb/output/"
 
 
+def standard_conversion(ring, clauses):
+    functions = []
+    variables = ring.gens()
+
+    for c in clauses:
+        f = ring(1)
+        for L in c:
+            if L > 0:
+                f *= (variables[L] + 1)
+            elif L < 0:
+                f *= variables[-L]
+
+        functions.append(f)
+
+    return functions
+
+
 def process(nr_vars, clauses, nr):
 	B = BooleanPolynomialRing(nr_vars+1, 'x')
 	ideal = B.ideal(standard_conversion(B, clauses))
