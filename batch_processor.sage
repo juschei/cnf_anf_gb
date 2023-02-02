@@ -52,4 +52,7 @@ if __name__=="__main__":
             nr_vars, clauses = msgspec.msgpack.decode(raw)
             process(nr_vars, clauses, nr)
         gc.collect()
-		
+	
+    from guppy import hpy
+    h = hpy()
+    print(h.heap())
