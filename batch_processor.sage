@@ -39,7 +39,7 @@ if __name__=="__main__":
     parser.add_argument("--startidx", type=int, required=True)
     parser.add_argument("--total", type=int, required=False)
     parser.add_argument("--nrworkers", type=int, required=False)
-    TOTAL = 47
+    TOTAL = 500
     NR_WORKERS = 4
     args = parser.parse_args()
     startidx = args.startidx

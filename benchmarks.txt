@@ -1,5 +1,5 @@
-run 1/4 in onebatch
-1m13s
+47 jobs
+-------
 
 run all of them restarting sage every time
 2m17
@@ -7,5 +7,12 @@ run all of them restarting sage every time
 alle nacheinander
 5s
 
+4 worker split nacheinander
+13s
+
 sage starten
 2.5s
+
+
+500 jobs
+-------
