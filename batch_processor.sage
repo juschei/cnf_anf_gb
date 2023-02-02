@@ -24,6 +24,7 @@ def standard_conversion(ring, clauses):
     return functions
 
 
+@profile
 def process(nr_vars, clauses, nr):
 	B = BooleanPolynomialRing(nr_vars+1, 'x')
 	ideal = B.ideal(standard_conversion(B, clauses))
