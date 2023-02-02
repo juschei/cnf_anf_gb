@@ -1,5 +1,6 @@
 from sage.rings.polynomial.pbori import BooleanPolynomialRing
 import msgspec
+import argparse
 
 
 inpath = "/home/juschei/Desktop/cnf_anf_gb/input/"
