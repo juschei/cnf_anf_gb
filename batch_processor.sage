@@ -2,7 +2,7 @@ from sage.rings.polynomial.pbori import BooleanPolynomialRing
 import msgspec
 import argparse
 import gc
-from memory_profiler import profile
+# from memory_profiler import profile
 
 inpath = "/home/juschei/Desktop/cnf_anf_gb/input/"
 outpath = "/home/juschei/Desktop/cnf_anf_gb/output/"
@@ -29,7 +29,7 @@ def standard_conversion(boolean_ring, clauses):
     return functions
 
 
-@profile
+# @profile
 def process(boolean_ring, clauses, nr):
 
     #B = BooleanPolynomialRing(nr_vars+1, 'x')
