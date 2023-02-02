@@ -176,7 +176,7 @@ if __name__ == "__main__":
     ex1 = "example1.cnf"
     ex2 = "larger_example.cnf"
     ex2 = "new2.cnf"
-    in_data = open('cnfs/' + ex1).read().splitlines()
+    in_data = open('cnfs/' + ex2).read().splitlines()
     clauses = [[int(n) for n in line.split() if n != '0'] for line in in_data if line[0] not in ('c', 'p')]
 
     nr_vars = count_variables(clauses)
