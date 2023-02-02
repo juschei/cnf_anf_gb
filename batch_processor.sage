@@ -37,8 +37,10 @@ def process(nr_vars, clauses, nr):
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--startidx", type=int, required=True)
+    parser.add_argument("--total", type=int, required=False)
+    parser.add_argument("--nrworkers", type=int, required=False)
     TOTAL = 47
-    NR_WORKERS = 1
+    NR_WORKERS = 4
     args = parser.parse_args()
     startidx = args.startidx
     for nr in range(startidx, TOTAL, NR_WORKERS):
