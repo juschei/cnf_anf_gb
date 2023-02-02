@@ -38,7 +38,7 @@ if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--startidx", type=int, required=True)
     TOTAL = 47
-    NR_WORKERS = 4
+    NR_WORKERS = 1
     args = parser.parse_args()
     startidx = args.startidx
     for nr in range(startidx, TOTAL, NR_WORKERS):
