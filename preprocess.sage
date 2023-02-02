@@ -180,7 +180,7 @@ if __name__ == "__main__":
     clauses = [[int(n) for n in line.split() if n != '0'] for line in in_data if line[0] not in ('c', 'p')]
 
     nr_vars = count_variables(clauses)
-    print(f"Read CNF with {nr_vars} and {len(clauses)} clauses")
+    print(f"Reading CNF with {nr_vars} variables and {len(clauses)} clauses...")
 
     # create boolean ring and convert cnf to polynomials
     from sage.rings.polynomial.pbori import BooleanPolynomialRing
