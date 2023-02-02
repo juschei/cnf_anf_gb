@@ -2,4 +2,5 @@ input/*
 logs/*
 output/*
 graphtgest.ipynb
+*.sage.py
 
