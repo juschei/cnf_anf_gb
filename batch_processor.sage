@@ -1,7 +1,7 @@
 from sage.rings.polynomial.pbori import BooleanPolynomialRing
 import msgspec
 import argparse
-
+import gc
 
 inpath = "/home/juschei/Desktop/cnf_anf_gb/input/"
 outpath = "/home/juschei/Desktop/cnf_anf_gb/output/"
@@ -49,4 +49,5 @@ if __name__=="__main__":
             raw = f.read()
             nr_vars, clauses = msgspec.msgpack.decode(raw)
             process(nr_vars, clauses, nr)
+        gc.collect()
 		
