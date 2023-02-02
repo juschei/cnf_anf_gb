@@ -42,6 +42,7 @@ if __name__=="__main__":
     args = parser.parse_args()
     startidx = args.startidx
     for nr in range(startidx, TOTAL, NR_WORKERS):
+        print("working with file", nr, "now")
         with open(inpath + str(nr).zfill(3), "rb") as f:
             raw = f.read()
             nr_vars, clauses = msgspec.msgpack.decode(raw)
